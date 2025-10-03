@@ -1,0 +1,44 @@
+{% extends "hrm_app/base.html" %}
+{% block title %}Vacantes{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Gestión de Vacantes</h2>
+  <a href="{% url 'vacante_create' %}" class="btn">Nueva Vacante</a>
+  <table class="table table-striped table-bordered">
+    <thead class="table-header">
+      <tr>
+        <th>Puesto</th>
+        <th>Área</th>
+        <th>Requisitos</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {% for v in vacantes %}
+      <tr>
+        <td>{{ v.puesto }}</td>
+        <td>{{ v.area }}</td>
+        <td>{{ v.requisitos|truncatewords:10 }}</td>
+        <td>{{ v.estado }}</td>
+        <td>
+          <a href="{% url 'vacante_edit' v.id %}" class="btn btn-sm btn-primary">
+            ✏️ Editar
+          </a>
+          <a href="{% url 'vacante_delete' v.id %}"
+            class="btn btn-sm {% if u.is_active %}btn-danger{% else %}btn-success{% endif %}">
+            {% if u.is_active %} 🔒 Desactivar {% else %} 🔓 Activar {% endif %}
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No hay vacantes registradas.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "hrm_app/base.html" %}
+{% block content %}
+<h2>{{ accion }} Usuario</h2>
+<div class="card">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">{{ accion }}</button>
+        <a href="{% url 'usuarios' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

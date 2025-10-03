@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}HRM Consulting{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'hrm_app/css/style.css' %}">
+</head>
+
+<body>
+   {% if user.is_authenticated %}
+  <header class="main-header">
+   
+    <a href="{% url 'dashboard' %}" class="logo-link">
+        <img src="{% static 'hrm_app/img/logo-hrm.png' %}" alt="HRM Logo" class="logo-img">
+    </a>
+    <nav class="navbar">
+
+      {% if user.is_authenticated %}
+      {% if user.rol == "administrador" %}
+      <a href="{% url 'dashboard' %}">Inicio</a>
+      <a href="{% url 'vacantes' %}">Vacantes</a>
+      <a href="{% url 'usuarios' %}">Usuarios</a>
+      <a href="{% url 'candidatos' %}">Candidatos</a>
+      <a href="{% url 'informe_riesgo' %}">Informe de Riesgo</a>
+      {% elif user.rol == "reclutador" %}
+      <a href="{% url 'vacantes' %}">Vacantes</a>
+      <a href="{% url 'candidatos' %}">Candidatos</a>
+      <a href="{% url 'informe_riesgo' %}">Informe de Riesgo</a>
+      {% elif user.rol == "candidato" %}
+      <a href="{% url 'candidato_create' %}">Registrar Candidato</a>
+      {% endif %}
+      <a href="{% url 'logout' %}">Salir</a>
+      {% endif %}
+
+    </nav>
+    {% endif %}
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+ 
+</body>
+
+</html>

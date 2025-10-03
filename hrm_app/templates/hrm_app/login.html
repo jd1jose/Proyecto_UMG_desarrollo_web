@@ -1,0 +1,27 @@
+{% extends "hrm_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 50px auto; text-align:center;">
+  <h2>Iniciar Sesión</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div>
+      <label for="username">Usuario</label>
+      <input type="text" name="username" placeholder="Ingrese su usuario" required>
+    </div>
+    <div>
+      <label for="password">Contraseña</label>
+      <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+    </div>
+    <button type="submit" class="btn">Iniciar Sesión</button>
+  </form>
+  <a href="#">¿Olvidó su contraseña?</a>
+    {% if messages %}
+    {% for message in messages %}
+       <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

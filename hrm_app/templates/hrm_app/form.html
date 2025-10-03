@@ -1,0 +1,16 @@
+{% extends "hrm_app/base.html" %}
+{% block title %}Formulario{% endblock %}
+{% block content %}
+<div class="card" style="max-width:600px;margin:auto;">
+    <h2>{{ titulo }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <div class="form-actions">
+            <button type="submit" class="btn">Guardar</button>
+            <a href="{% url 'vacantes' %}" class="btn cancel-btn">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
